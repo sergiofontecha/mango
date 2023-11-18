@@ -1,0 +1,33 @@
+{
+  "name": "mango",
+  "version": "0.0.0",
+  "private": true,
+  "engines": {
+    "node": ">=18.17.0"
+  },
+  "scripts": {
+    "build": "next build",
+    "dev": "next dev",
+    "prettier": "prettier --write --ignore-unknown .",
+    "prettier:check": "prettier --check --ignore-unknown .",
+    "start": "next start"
+  },
+  "dependencies": {
+    "@types/node": "20.5.7",
+    "autoprefixer": "10.4.15",
+    "next": "^14.0.2",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "tailwindcss": "3.3.3",
+    "typescript": "5.2.2"
+  },
+  "devDependencies": {
+    "@types/react": "18.2.21",
+    "@types/react-dom": "18.2.14",
+    "eslint": "^8.52.0",
+    "eslint-config-next": "^14.0.0",
+    "eslint-config-prettier": "9.0.0",
+    "prettier": "^3.0.3",
+    "prettier-plugin-tailwindcss": "0.5.4"
+  }
+}
