@@ -1,109 +1,19 @@
-'use client'
+import RangeSlider from '../ui/rangeSlider/rangeSlider'
+import { GetNormalValues } from '../share/initialValuesService'
+import { NormalInitialValues } from '../share/interfaces'
 
-import { useState, useEffect, useRef } from 'react'
-
-export default function RangeSlider() {
-  const initialValues = {
-    initialMin: 0,
-    initialMax: 1000,
-    min: 0,
-    max: 1000,
-    step: 0,
-    value: 0,
-  }
-  const progressRef = useRef(null) as any
-  const [minValue, setMinValue] = useState(initialValues.initialMin)
-  const [maxValue, setMaxValue] = useState(initialValues.initialMax)
-
-  const handleMin = (e: any): void => {
-    if (maxValue - minValue >= initialValues.value && maxValue <= initialValues.max) {
-      if (parseInt(e.target.value) > maxValue && minValue < maxValue) {
-        setMinValue(maxValue - 5)
-      } else {
-        setMinValue(parseInt(e.target.value))
-      }
-    }
-  }
-
-  const handleMax = (e: any): void => {
-    if (maxValue - minValue >= initialValues.value && maxValue <= initialValues.max) {
-      if (parseInt(e.target.value) < minValue && maxValue > minValue) {
-        setMaxValue(minValue + 5)
-      } else {
-        setMaxValue(parseInt(e.target.value))
-      }
-    }
-  }
-
-  useEffect(() => {
-    if (progressRef.current !== undefined) {
-      progressRef.current.style.left = (minValue / initialValues.max) * initialValues.step + '%'
-      progressRef.current.style.right = initialValues.step - (maxValue / initialValues.max) * initialValues.step + '%'
-    }
-  }, [minValue, maxValue, initialValues.max, initialValues.step])
+export default async function NormalRangeSlider() {
+  const data: NormalInitialValues | undefined = await GetNormalValues()
+  const initialValues = JSON.parse(JSON.stringify(data))
 
   return (
     <>
-      <div className="flex justify-between items-center my-6">
-        <div className="rounded-md">
-          <span className="p-2 font-semibold"> Min</span>
-          <input
-            onChange={(e) => {
-              if (parseInt(e.target.value) >= maxValue) {
-                setMinValue(maxValue - 1)
-              } else {
-                setMinValue(parseInt(e.target.value))
-              }
-            }}
-            type="number"
-            value={minValue}
-            className="w-24 rounded-md border border-gray-400"
-          />
-        </div>
-        <div className="rounded-md">
-          <span className="p-2 font-semibold"> Max</span>
-          <input
-            onChange={(e) => {
-              if (parseInt(e.target.value) <= minValue) {
-                setMaxValue(minValue + 1)
-              } else {
-                setMaxValue(parseInt(e.target.value))
-              }
-            }}
-            type="number"
-            value={maxValue}
-            className="w-24 rounded-md border border-gray-400"
-          />
-        </div>
+      <div className="min-w-full flex justify-center gap-6 rounded-lgbg-gray-50 px-6 md:w-2/5 md:px-20">
+        <p className={`text-xl text-center text-gray-800 md:text-3xl md:leading-normal`}>
+          <strong>This is a normal range slider example</strong>
+        </p>
       </div>
-
-      <div className="mb-4">
-        <div className="slider relative h-1 rounded-md bg-gray-800">
-          <div className="progress absolute h-1 rounded " ref={progressRef}></div>
-        </div>
-
-        <div className="range-input relative  ">
-          <input
-            onChange={handleMin}
-            type="range"
-            min={initialValues.min}
-            step={initialValues.step}
-            max={initialValues.max}
-            value={minValue}
-            className="range-min absolute w-full -top-1 h-1 bg-transparent appearance-none pointer-events-none"
-          />
-
-          <input
-            onChange={handleMax}
-            type="range"
-            min={initialValues.min}
-            step={initialValues.step}
-            max={initialValues.max}
-            value={maxValue}
-            className="range-max absolute w-full -top-1 h-1 bg-transparent appearance-none pointer-events-none"
-          />
-        </div>
-      </div>
+      <RangeSlider initialValues={initialValues} />
     </>
   )
 }
