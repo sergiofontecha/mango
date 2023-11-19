@@ -1,13 +1,13 @@
-import { UserGroupIcon, HomeIcon, DocumentDuplicateIcon } from '@heroicons/react/24/outline'
+import { HomeIcon, UserIcon, CurrencyEuroIcon } from '@heroicons/react/24/outline'
 
 const links = [
   { name: 'Home', href: '/', icon: HomeIcon },
   {
     name: 'Normal Range',
     href: '/exercise1',
-    icon: DocumentDuplicateIcon,
+    icon: UserIcon,
   },
-  { name: 'Fixed Values Range', href: '/exercise2', icon: UserGroupIcon },
+  { name: 'Fixed Values Range', href: '/exercise2', icon: CurrencyEuroIcon },
 ]
 
 export default function NavLinks() {
