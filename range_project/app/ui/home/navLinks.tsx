@@ -5,9 +5,9 @@ const links = [
   {
     name: 'Normal Range',
     href: '/exercise1',
-    icon: UserIcon,
+    icon: CurrencyEuroIcon,
   },
-  { name: 'Fixed Values Range', href: '/exercise2', icon: CurrencyEuroIcon },
+  { name: 'Fixed Values Range', href: '/exercise2', icon: UserIcon },
 ]
 
 export default function NavLinks() {
