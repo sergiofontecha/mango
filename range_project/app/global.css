@@ -20,3 +20,12 @@ input[type='number']::-webkit-outer-spin-button {
 body {
   background: #ddd;
 }
+
+input[type="range"]::-webkit-slider-thumb {
+  pointer-events: auto;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  -webkit-appearance: none;
+  @apply bg-gray-800;
+}
