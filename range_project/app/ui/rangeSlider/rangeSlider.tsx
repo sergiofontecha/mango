@@ -11,7 +11,7 @@ export default function RangeSlider({ initialValues }: { initialValues: NormalIn
   const handleMin = (e: any): void => {
     if (maxValue - minValue >= initialValues.value && maxValue <= initialValues.max) {
       if (parseInt(e.target.value) > maxValue && minValue < maxValue) {
-        setMinValue(maxValue - 5)
+        setMinValue(maxValue - 10)
       } else {
         setMinValue(parseInt(e.target.value))
       }
@@ -21,7 +21,7 @@ export default function RangeSlider({ initialValues }: { initialValues: NormalIn
   const handleMax = (e: any): void => {
     if (maxValue - minValue >= initialValues.value && maxValue <= initialValues.max) {
       if (parseInt(e.target.value) < minValue && maxValue > minValue) {
-        setMaxValue(minValue + 5)
+        setMaxValue(minValue + 10)
       } else {
         setMaxValue(parseInt(e.target.value))
       }

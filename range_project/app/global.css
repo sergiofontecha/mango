@@ -29,3 +29,9 @@ input[type="range"]::-webkit-slider-thumb {
   -webkit-appearance: none;
   @apply bg-gray-800;
 }
+
+input[type="range"]:hover::-webkit-slider-thumb{
+  width: 34px;
+  height: 34px;
+  cursor: grabbing;
+}
