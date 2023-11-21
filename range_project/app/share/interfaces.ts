@@ -1,8 +1,5 @@
-export interface NormalInitialValues {
-  initialMin: number
-  initialMax: number
+export interface RangeValues {
   min: number
   max: number
-  step: number
-  value: number
+  values: number[]
 }
