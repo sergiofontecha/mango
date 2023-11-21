@@ -1,5 +1,9 @@
 import { RangeValues } from '@/app/share/interfaces'
 
+export const compareNumbers = (a: number, b: number) => {
+  return a - b
+}
+
 export const setBulletsToStep = (value: any, range: number[]): any => {
   const prevDiff = {
     min: Math.abs(value.min - range[0]),
@@ -42,7 +46,14 @@ export const setBulletsToStep = (value: any, range: number[]): any => {
   return intervals
 }
 
-export const setBulletPosition = (value: number, ref: any, initialValues: RangeValues): string => {
+export const setBulletPosition = (value: number, ref: any, minValue: number, maxValue: number): string => {
   const displacement = isNaN(ref?.current?.clientWidth) ? '.5em' : `${ref.current.clientWidth / 2}px`
-  return `calc(${((value - initialValues.min) / (initialValues.max - initialValues.min)) * 100}% - ${displacement})`
+  return `calc(${((value - minValue) / (maxValue - minValue)) * 100}% - ${displacement})`
+}
+
+export const getNewMinValue = (newMin: number, initialMin: number, currentMax: number): number => {
+  return newMin <= initialMin ? initialMin : newMin >= currentMax ? currentMax - 1 : newMin
+}
+export const getNewMaxValue = (newMax: number, initialMax: number, currentMin: number): number => {
+  return newMax >= initialMax ? initialMax : newMax <= currentMin ? currentMin + 1 : newMax
 }
