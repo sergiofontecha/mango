@@ -17,23 +17,11 @@ Mango Tech Test
 npm i
 ```
 
-2. run project
+2. run project (Compiles and hot-reloads for development)
 
 ```shell
-npm run start
-```
-
-3.  open your favorite web browser http://localhost:3000/
-
-### Compiles and minifies for production
-
-```
-npm run build
-```
-### Compiles and hot-reloads for development
-
-```
 npm run dev
 ```
 
+3.  open your favorite web browser http://localhost:3000/
 
