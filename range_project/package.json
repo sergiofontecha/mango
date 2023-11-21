@@ -8,8 +8,8 @@
   "scripts": {
     "dev": "next dev",
     "prettier": "prettier --write --ignore-unknown .",
-    "prettier:check": "prettier --check --ignore-unknown .",
-    "start": "next start"
+    "prettier:check": "prettier --check --ignore-unknown ."
+    
   },
   "dependencies": {
     "next": "^14.0.2",
