@@ -1,11 +1,13 @@
 import RangeSlider from '../ui/rangeSlider/rangeSlider'
 import { GetNormalValues } from '../share/initialValuesService'
+import { compareNumbers } from '../share/utils'
 import { RangeValues } from '../share/interfaces'
 import { RangeType } from '@/app/share/enums'
 
 export default async function NormalRangeSlider() {
   const data: RangeValues | undefined = await GetNormalValues()
-  const initialValues = JSON.parse(JSON.stringify(data))
+  let initialValues = JSON.parse(JSON.stringify(data))
+  initialValues.values = initialValues.values.sort(compareNumbers)
 
   return (
     <>

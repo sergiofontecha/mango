@@ -1,11 +1,13 @@
 import RangeSlider from '../ui/rangeSlider/rangeSlider'
 import { GetFixedValues } from '../share/initialValuesService'
+import { compareNumbers } from '../share/utils'
 import { RangeValues } from '../share/interfaces'
 import { RangeType } from '@/app/share/enums'
 
 export default async function FixedValuesRangeSlider() {
   const data: RangeValues | undefined = await GetFixedValues()
-  const initialValues = JSON.parse(JSON.stringify(data))
+  let initialValues = JSON.parse(JSON.stringify(data))
+  initialValues.values = initialValues.values.sort(compareNumbers)
 
   return (
     <>
