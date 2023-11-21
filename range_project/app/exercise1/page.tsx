@@ -1,9 +1,10 @@
 import RangeSlider from '../ui/rangeSlider/rangeSlider'
 import { GetNormalValues } from '../share/initialValuesService'
-import { NormalInitialValues } from '../share/interfaces'
+import { RangeValues } from '../share/interfaces'
+import { RangeType } from '@/app/share/enums'
 
 export default async function NormalRangeSlider() {
-  const data: NormalInitialValues | undefined = await GetNormalValues()
+  const data: RangeValues | undefined = await GetNormalValues()
   const initialValues = JSON.parse(JSON.stringify(data))
 
   return (
@@ -13,7 +14,7 @@ export default async function NormalRangeSlider() {
           <strong>This is a normal range slider example</strong>
         </p>
       </div>
-      <RangeSlider initialValues={initialValues} />
+      <RangeSlider rangeType={RangeType.NORMAL} initialValues={initialValues} />
     </>
   )
 }
