@@ -1,5 +1,3 @@
-import { RangeValues } from '@/app/share/interfaces'
-
 export const compareNumbers = (a: number, b: number) => {
   return a - b
 }
@@ -54,6 +52,7 @@ export const setBulletPosition = (value: number, ref: any, minValue: number, max
 export const getNewMinValue = (newMin: number, initialMin: number, currentMax: number): number => {
   return newMin <= initialMin || Number.isNaN(newMin) ? initialMin : newMin >= currentMax ? currentMax - 1 : newMin
 }
+
 export const getNewMaxValue = (newMax: number, initialMax: number, currentMin: number): number => {
   return newMax >= initialMax || Number.isNaN(newMax) ? initialMax : newMax <= currentMin ? currentMin + 1 : newMax
 }
