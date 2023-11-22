@@ -4,7 +4,7 @@ export const compareNumbers = (a: number, b: number) => {
   return a - b
 }
 
-export const setBulletsToStep = (value: any, range: number[]): any => {
+export const chooseNextStep = (value: any, range: number[]): any => {
   const prevDiff = {
     min: Math.abs(value.min - range[0]),
     max: Math.abs(value.max - range[0]),
@@ -52,8 +52,8 @@ export const setBulletPosition = (value: number, ref: any, minValue: number, max
 }
 
 export const getNewMinValue = (newMin: number, initialMin: number, currentMax: number): number => {
-  return newMin <= initialMin ? initialMin : newMin >= currentMax ? currentMax - 1 : newMin
+  return newMin <= initialMin || Number.isNaN(newMin) ? initialMin : newMin >= currentMax ? currentMax - 1 : newMin
 }
 export const getNewMaxValue = (newMax: number, initialMax: number, currentMin: number): number => {
-  return newMax >= initialMax ? initialMax : newMax <= currentMin ? currentMin + 1 : newMax
+  return newMax >= initialMax || Number.isNaN(newMax) ? initialMax : newMax <= currentMin ? currentMin + 1 : newMax
 }
