@@ -4,7 +4,6 @@ import { useState, useRef, useEffect } from 'react'
 import { setBulletsToStep, setBulletPosition, getNewMinValue, getNewMaxValue } from '@/app/share/utils'
 import { RangeValues } from '@/app/share/interfaces'
 import { InputType, RangeType } from '@/app/share/enums'
-import './rangeSlider.css'
 
 export default function RangeSlider({
   initialValues,
@@ -20,7 +19,7 @@ export default function RangeSlider({
   const [tempValues, setTempValues] = useState<{ [key: string]: number | null }>({})
   const [isDragging, setIsDragging] = useState<boolean>(false)
   const [dragType, setDragType] = useState<InputType.MIN | InputType.MAX | null>(null)
-  const rangeLineRef = useRef<HTMLDivElement>(null)
+  const sliderRef = useRef<HTMLDivElement>(null)
   const minBulletRef = useRef<HTMLDivElement>(null)
   const maxBulletRef = useRef<HTMLDivElement>(null)
   const minInputRef = useRef<HTMLInputElement>(null)
@@ -155,7 +154,7 @@ export default function RangeSlider({
     } else {
       clientX = event.clientX
     }
-    const rangeLineRect = rangeLineRef.current!.getBoundingClientRect()
+    const rangeLineRect = sliderRef.current!.getBoundingClientRect()
     const position = (clientX - rangeLineRect.left) / rangeLineRect.width
     if (position < 0 || position > 1) return
     const newValue = minValue + position * (maxValue - minValue)
@@ -179,11 +178,11 @@ export default function RangeSlider({
 
   return (
     <div className="flex justify-between items-center my-6">
-      <div className="range__container">
+      <div className="flex items-center relative  w-full">
         {rangeType === RangeType.NORMAL ? (
           <input
             type="number"
-            className="w-24 rounded-md border border-gray-400 mr-4"
+            className="w-24 rounded-md border text-right border-gray-400 mr-4"
             ref={minInputRef}
             value={values.min}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleChange(e, InputType.MIN)}
@@ -193,16 +192,21 @@ export default function RangeSlider({
         ) : (
           <span className="w-24 text-right mr-4">{values.min}</span>
         )}
-        <div className="range__line" ref={rangeLineRef} onMouseMove={handleMouseMove} onTouchMove={handleMouseMove}>
+        <div
+          className="w-full h-12 relative before:block before:absolute before:-inset-x-0 before:h-1.5 before:mt-5 before:bg-gray-800"
+          ref={sliderRef}
+          onMouseMove={handleMouseMove}
+          onTouchMove={handleMouseMove}
+        >
           <div
-            className="range__bullet bg-gray-800"
+            className="w-6 h-6 absolute rounded-full mt-2.5 bg-gray-800 cursor-grab hover:w-8 hover:h-8 hover:mt-1.5 hover:cursor-grabbing"
             ref={minBulletRef}
             onMouseDown={(e: React.MouseEvent) => handleMouseDown(e, InputType.MIN)}
             onTouchStart={(e: React.TouchEvent) => handleMouseDown(e, InputType.MIN)}
             style={{ left: setBulletPosition(position.min, minBulletRef, minValue, maxValue) }}
           ></div>
           <div
-            className="range__bullet  bg-gray-800"
+            className="w-6 h-6 absolute rounded-full mt-2.5 bg-gray-800 cursor-grab hover:w-8 hover:h-8 hover:mt-1.5 hover:cursor-grabbing"
             ref={maxBulletRef}
             onMouseDown={(e: React.MouseEvent) => handleMouseDown(e, InputType.MAX)}
             onTouchStart={(e: React.TouchEvent) => handleMouseDown(e, InputType.MAX)}
@@ -212,7 +216,7 @@ export default function RangeSlider({
         {rangeType === RangeType.NORMAL ? (
           <input
             type="number"
-            className="w-24 rounded-md border border-gray-400 ml-4"
+            className="w-24 rounded-md border border-gray-400 ml-6"
             ref={maxInputRef}
             value={values.max}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleChange(e, InputType.MAX)}
@@ -220,7 +224,7 @@ export default function RangeSlider({
             onBlur={() => escape()}
           />
         ) : (
-          <span className="w-24 text-center mr-4">{values.max}</span>
+          <span className="w-24 text-center ml-1.5">{values.max}</span>
         )}
       </div>
     </div>
